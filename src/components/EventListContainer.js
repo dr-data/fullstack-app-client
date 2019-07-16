@@ -17,7 +17,7 @@ class EventListContainer extends Component {
                         {this.props.events
                             .map((event, index) =>
                                 <li key={index}>
-                                    <Link to={`/event/${event.id}`}>
+                                    <Link to={`/event/${encodeURIComponent(event.id)}`}>
                                         <EventItem event={event} />
                                     </Link>
                                 </li>)

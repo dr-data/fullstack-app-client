@@ -1,19 +1,34 @@
 import React from 'react'
 import { Route, Switch, Redirect } from 'react-router-dom'
-import {withRouter} from 'react-router'
+import { withRouter } from 'react-router'
 import { connect } from 'react-redux'
 import EventListContainer from './EventListContainer';
 import TicketListContainer from './TicketListContainer';
 import TicketDetailsContainer from './TicketDetailsContainer';
+import LoginFormContainer from './LoginFormContainer';
+import SignUpFormContainer from './SignUpFormContainer';
 
 function Routes(props) {
   return (
     <div>
-        <Route path='/' exact component={EventListContainer} />
-        <Route path='/event/:id' exact component={TicketListContainer} />
-        <Route path='/event/:id/ticket/:ticketId' exact component={TicketDetailsContainer} />
+      {!props.authenticated &&
+        <div>
+          <Switch>
+
+            <Route path="/sign-up" exact component={SignUpFormContainer} />
+          </Switch>
+        </div>
+      }
+      <Route path="/" exact component={LoginFormContainer} />
+      <Route path='/' exact component={EventListContainer} />
+      <Route path='/event/:id' exact component={TicketListContainer} />
+      <Route path='/event/:id/ticket/:ticketId' exact component={TicketDetailsContainer} />
     </div>
   )
 }
 
-export default withRouter(connect()(Routes))
+const mapStateToProps = state => ({
+  authenticated: !!state.currentUser
+})
+
+export default withRouter(connect(mapStateToProps)(Routes))
