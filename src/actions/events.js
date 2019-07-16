@@ -10,7 +10,6 @@ function getAllEvents(payload) {
     }
 }
 
-//fetches an array of all paintings
 export function getEvents() {
     const url = `${baseUrl}/events`
     return async function (dispatch) {
@@ -32,7 +31,6 @@ function getSelectedEvent(event, tickets) {
     }
 }
 
-//fetches an array of all paintings
 export function getEvent(id) {
     const url = `${baseUrl}/events/${encodeURIComponent(id)}`
     return async function (dispatch) {
@@ -48,4 +46,39 @@ export function getEvent(id) {
         }
 
     }
+}
+
+
+export const EVENT_CREATE_SUCCESS = 'EVENT_CREATE_SUCCESS'
+
+const eventCreateSuccess = event => ({
+  type: EVENT_CREATE_SUCCESS,
+  event
+})
+
+export const createEvent = (data) => dispatch => {
+  request
+    .post(`${baseUrl}/events`)
+    .send(data)
+    .then(response => {
+      dispatch(eventCreateSuccess(response.body))
+    })
+    .catch(console.error)
+}
+
+
+export const EVENT_UPDATED = 'EVENT_UPDATED'
+
+const eventUpdated = event => ({
+  type: EVENT_UPDATED,
+  event
+})
+
+export const updateEvent = (id, data) => dispatch => {
+  request
+    .put(`${baseUrl}/events/${id}`)
+    .send(data)
+    .then(response => {
+      dispatch(eventUpdated(response.body, data))
+    })
 }
