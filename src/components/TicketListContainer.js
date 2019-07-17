@@ -3,12 +3,13 @@ import {connect} from 'react-redux'
 import TicketList from './TicketList'
 import EventItem from './EventItem'
 import Loader from './Loader'
-import {getEvent} from '../actions/events'
+import {getEvent, getTickets} from '../actions/events'
 
 class TicketListContainer extends Component {
     componentDidMount(){
         const id = this.props.match.params.id
         this.props.getEvent(id)
+        this.props.getTickets(id)
     }
     render() {
         return (
@@ -37,4 +38,4 @@ const mapSateToProps = (state) => {
     }
     
 }
-export default connect( mapSateToProps,{getEvent})(TicketListContainer)
+export default connect( mapSateToProps,{getEvent, getTickets})(TicketListContainer)
