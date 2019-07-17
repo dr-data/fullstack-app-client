@@ -14,12 +14,11 @@ function Routes(props) {
       {!props.authenticated &&
         <div>
           <Switch>
-
+            <LoginFormContainer />
             <Route path="/sign-up" exact component={SignUpFormContainer} />
           </Switch>
         </div>
       }
-      <Route path="/" exact component={LoginFormContainer} />
       <Route path='/' exact component={EventListContainer} />
       <Route path='/event/:id' exact component={TicketListContainer} />
       <Route path='/event/:id/ticket/:ticketId' exact component={TicketDetailsContainer} />
@@ -28,7 +27,7 @@ function Routes(props) {
 }
 
 const mapStateToProps = state => ({
-  authenticated: !!state.currentUser
+  authenticated: !!state.users.token
 })
 
 export default withRouter(connect(mapStateToProps)(Routes))

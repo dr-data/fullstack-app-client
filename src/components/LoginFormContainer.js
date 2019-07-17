@@ -20,6 +20,8 @@ class LoginFormContainer extends Component {
     render() {
         return (
             <div className='container'>
+                {this.props.message &&
+                <p className='message'>{this.props.message}</p>}
                 <LoginForm
                     onSubmit={this.onSubmit}
                     onChange={this.onChange}
@@ -33,4 +35,12 @@ class LoginFormContainer extends Component {
     }
 }
 
-export default connect(null, {login})(LoginFormContainer)
+function mapStateToProps (state) {
+    console.log(state)
+    return {
+        message: state.users.message,
+        username: state.users.username  
+    }
+}
+
+export default connect(mapStateToProps, {login})(LoginFormContainer)

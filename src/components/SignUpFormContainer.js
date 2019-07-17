@@ -31,7 +31,7 @@ export class SignUpFormContainer extends Component {
         return (
             <div className='container'>
                 {this.props.message &&
-                <p>{this.props.message}</p>}
+                <p className='message'>{this.props.message}</p>}
                 {!this.props.username &&
                     <SignUpForm
                     onSubmit={this.onSubmit}
