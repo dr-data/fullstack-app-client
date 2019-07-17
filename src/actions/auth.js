@@ -1,9 +1,16 @@
 import request from 'superagent'
 import { baseUrl } from "../constants"
 
+export const ERROR = 'ERROR'
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
 export const SIGNUP_SUCCESS = 'SIGNUP_SUCCESS'
-export const ERROR = 'ERROR'
+
+const errorAction = (message) => {
+  return {
+    type: ERROR,
+    payload: { message }
+  }
+}
 
 const loginSuccess = payload => {
   console.log(payload)
@@ -13,16 +20,6 @@ const loginSuccess = payload => {
   }
 }
 
-
-
-const errorAction = (message) => {
-  return {
-    type: ERROR,
-    payload: { message }
-  }
-}
-
-
 export const login = (username, password) => dispatch => {
   request
     .post(`${baseUrl}/login`)
@@ -30,13 +27,15 @@ export const login = (username, password) => dispatch => {
     .then(response => {
       dispatch(loginSuccess(response.body))
     })
-    .catch(console.error)
+    .catch(error => {
+      dispatch(errorAction(error.response.text))
+    })
 }
 
 const signUpSuccess = (newUser) => {
   return {
     type: SIGNUP_SUCCESS,
-    payload: { ...newUser}
+    payload: { ...newUser }
   }
 }
 
@@ -51,7 +50,5 @@ export const signUp = (username, password, password_confirmation) => dispatch =>
     })
     .catch(error => {
       dispatch(errorAction(error.response.text))
-    }
-    )
-
+    })
 }

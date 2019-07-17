@@ -2,7 +2,6 @@ import React from 'react'
 
 export default function EventItem(props) {
     const event = props.event
-    console.log(event, 'event')
     return (
         <div className='eventItem'>
             <img src={event.picture} alt={event.title} />
