@@ -22,11 +22,11 @@ export function getEvents() {
 
 export const GET_SELECTED_EVENT = 'GET_SELECTED_EVENT'
 
-function getSelectedEvent(event, tickets) {
+function getSelectedEvent(event) {
     return {
         type: GET_SELECTED_EVENT,
         payload : {
-            event, tickets 
+            event
         }
     }
 }
@@ -37,9 +37,8 @@ export function getEvent(id) {
         try {
             const response = await request(url)
             const { event } = response.body
-            const ticketsResponse = await request(`${baseUrl}/events/${encodeURIComponent(id)}/tickets`)
-            const {tickets} = ticketsResponse.body
-            dispatch(getSelectedEvent(event, tickets))
+           
+            dispatch(getSelectedEvent(event))
         }
         catch (error) {
             console.error(error)
@@ -48,6 +47,58 @@ export function getEvent(id) {
     }
 }
 
+export const GET_ALL_TICKETS = 'GET_ALL_TICKETS'
+
+function getAllTickets(tickets) {
+    return {
+        type: GET_ALL_TICKETS,
+        payload : { tickets }
+    }
+}
+
+export function getTickets(id) {
+    const url = `${baseUrl}/events/${encodeURIComponent(id)}/tickets`
+    return async function (dispatch) {
+        try {
+            const ticketsResponse = await request(url)
+            const {tickets} = ticketsResponse.body
+            dispatch(getAllTickets(tickets))
+        }
+        catch (error) {
+            console.error(error)
+        }
+
+    }
+}
+
+export const GET_SELECTED_TICKET = 'GET_SELECTED_TICKET'
+
+function getSelectedTicket(ticket, comments) {
+    return {
+        type: GET_SELECTED_TICKET,
+        payload : {
+            ticket,
+            comments
+        }
+    }
+}
+
+export function getTicket(id, ticketId) {
+    const url = `${baseUrl}/events/${encodeURIComponent(id)}/tickets/${encodeURIComponent(ticketId)}`
+    return async function (dispatch) {
+        try {
+            const response = await request(url)
+            const { ticket } = response.body
+            const commentsResponse = await request(`${baseUrl}/tickets/${encodeURIComponent(ticketId)}/comments`)
+            const {comments} = commentsResponse.body
+            dispatch(getSelectedTicket(ticket, comments))
+        }
+        catch (error) {
+            console.error(error)
+        }
+
+    }
+}
 
 export const EVENT_CREATE_SUCCESS = 'EVENT_CREATE_SUCCESS'
 
@@ -65,7 +116,6 @@ export const createEvent = (data) => dispatch => {
     })
     .catch(console.error)
 }
-
 
 export const EVENT_UPDATED = 'EVENT_UPDATED'
 

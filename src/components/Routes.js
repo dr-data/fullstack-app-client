@@ -14,7 +14,7 @@ function Routes(props) {
       {!props.authenticated &&
         <div>
           <Switch>
-            <LoginFormContainer />
+            <Route path="/" exact component={LoginFormContainer}/>
             <Route path="/sign-up" exact component={SignUpFormContainer} />
           </Switch>
         </div>
