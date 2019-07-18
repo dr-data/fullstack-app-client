@@ -13,19 +13,19 @@ const errorAction = (message) => {
 
 export const GET_EVENTS = 'GET_EVENTS'
 
-function getAllEvents(payload) {
+function getAllEvents(events, offset) {
     return {
         type: GET_EVENTS,
-        payload
+        payload: {events, offset: offset+9}
     }
 }
 
-export function getEvents() {
-    const url = `${baseUrl}/events`
+export function getEvents(offset) {
+    const url = `${baseUrl}/events?offset=${offset}`
     return async function (dispatch) {
         const response = await request(url)
         const { events } = response.body
-        dispatch(getAllEvents(events))
+        dispatch(getAllEvents(events, offset))
     }
 
 }
@@ -169,7 +169,6 @@ export const createTicket = (ticket) => (dispatch, getState) => {
             console.log(error)
         })
 }
-
 
 export const TICKET_UPDATE_SUCCESS = 'TICKET_UPDATE_SUCCESS'
 
