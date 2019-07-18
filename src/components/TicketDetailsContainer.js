@@ -11,18 +11,21 @@ class TicketDetailsContainer extends Component {
         const ticketId = this.props.match.params.ticketId
         const id = this.props.match.params.id
         this.props.getTicket(id, ticketId)
-        this.props.getTickets(id)
     }
    
     render() {
         return (
             <div className='container'>
-                {!(this.props.ticket || this.props.comments)&&
+                {this.props.error &&
+                    <h2>{this.props.error}</h2>
+                }
+                {(!(this.props.ticket || this.props.comments) && !this.props.error )&&
                     <Loader />
                 }
-                <p>We calculated that the risk of this ticket being a fraud is XX%</p>
+                
                 {this.props.ticket &&
-                    <TicketItem ticket={this.props.ticket} />
+                    
+                    <TicketItem ticket={this.props.ticket} author={this.props.author} risk={this.props.risk}/>
                 }
                 {this.props.comments &&
                     this.props.comments.map(comment=><Comment comment={comment} key={comment.id}/>)
@@ -36,7 +39,11 @@ function mapStateToProps (state) {
         ticket: state.events.ticket,
         comments: state.events.comments,
         event: state.events.event,
-        ticketList: state.events.tickets
+        ticketList: state.events.tickets,
+        risk : state.events.risk,
+        author: state.events.author,
+        error: state.events.error
+        
     }
 }
 export default connect(mapStateToProps,{getTicket, getEvent, getTickets})(TicketDetailsContainer)

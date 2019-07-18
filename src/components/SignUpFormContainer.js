@@ -40,7 +40,7 @@ export class SignUpFormContainer extends Component {
                 />
                 }
                     
-                <p>Now you can <Link to={'/'}>login</Link></p>
+                {/* <p>Now you can <Link to={'/'}>login</Link></p> */}
                 
             </div>
         )
