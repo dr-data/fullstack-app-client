@@ -28,7 +28,7 @@ export const login = (username, password) => dispatch => {
       dispatch(loginSuccess(response.body))
     })
     .catch(error => {
-      dispatch(errorAction(error))
+      console.log(error)
     })
 }
 

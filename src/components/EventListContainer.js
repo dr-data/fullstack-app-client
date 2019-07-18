@@ -15,11 +15,21 @@ class EventListContainer extends Component {
     }
     render() {
         return (
+            <div>
+            <div className='header'>
+                <h1>Welcome to Ticket Trade</h1>
+                <h2>Start now to browse events and tickets</h2>
+                {!this.props.users &&
+                    <Link className='button' to={'/sign-up'}>Create an account</Link>
+                }
+                {this.props.users && <Link className='button' to={'/create-event'}>Create an event</Link>}
+                
+            </div>
             <div className='container'>
                 {!this.props.events && <Loader />}
                 {this.props.events &&
                 <div>
-                <button onClick={this.onClick}>next</button>
+                <button onClick={this.onClick} className='button'>next</button>
                     <ul className='eventList'>
                         {this.props.events
                             .map((event, index) =>
@@ -30,8 +40,10 @@ class EventListContainer extends Component {
                                 </li>)
                         }
                     </ul>
+                    <button onClick={this.onClick} className='button'>next</button>
                     </div>
                 }
+            </div>
             </div>
         )
     }
@@ -39,7 +51,8 @@ class EventListContainer extends Component {
 const mapStatetoProps = (state) => {
     return {
         events: state.events.events,
-        offset: state.events.offset
+        offset: state.events.offset,
+        users: state.users.userId
     }
 }
 export default connect(mapStatetoProps, { getEvents })(EventListContainer)

@@ -2,8 +2,6 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import SignUpForm from './SignUpForm';
 import { signUp } from '../actions/auth'
-import { Link } from 'react-router-dom'
-
 
 export class SignUpFormContainer extends Component {
     state = {
@@ -29,9 +27,9 @@ export class SignUpFormContainer extends Component {
 
     render() {
         return (
-            <div className='container'>
-                {this.props.message &&
-                <p className='message'>{this.props.message}</p>}
+            <div className='container container-signup'>
+                {this.props.messageSignUp &&
+                <p className='message'>{this.props.messageSignUp}</p>}
                 {!this.props.username &&
                     <SignUpForm
                     onSubmit={this.onSubmit}
@@ -39,9 +37,6 @@ export class SignUpFormContainer extends Component {
                     values={this.state}
                 />
                 }
-                    
-                {/* <p>Now you can <Link to={'/'}>login</Link></p> */}
-                
             </div>
         )
     }
@@ -50,7 +45,7 @@ export class SignUpFormContainer extends Component {
 function mapStateToProps (state) {
     console.log(state)
     return {
-        message: state.users.message,
+        messageSignUp: state.users.message,
         username: state.users.username  
     }
 }

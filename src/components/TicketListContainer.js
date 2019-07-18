@@ -30,14 +30,13 @@ class TicketListContainer extends Component {
                     </div>
                 }
                   {this.props.user &&
-                    <Link to={`/event/${this.props.match.params.id}/create-ticket`}>Add a ticket</Link>
+                    <Link className='button' to={`/event/${this.props.match.params.id}/create-ticket`}>Add a ticket</Link>
                 }
                 {this.props.tickets &&
                     <div>
                         <TicketList tickets={this.props.tickets} colorAction={this.colorAction}/>
                     </div>
                 }
-
             </div>
         )
     }
@@ -46,8 +45,7 @@ const mapSateToProps = (state) => {
     return {
         event: state.events.event,
         tickets: state.events.tickets,
-        user: state.users
+        user: state.users.userId
     }
-
 }
 export default connect(mapSateToProps, { getEvent, getTickets })(TicketListContainer)
