@@ -7,27 +7,46 @@ import TicketListContainer from './TicketListContainer';
 import TicketDetailsContainer from './TicketDetailsContainer';
 import LoginFormContainer from './LoginFormContainer';
 import SignUpFormContainer from './SignUpFormContainer';
+import CreateEventFormContainer from './CreateEventFormContainer';
+import NavBar from './NavBar';
 
 function Routes(props) {
   return (
     <div>
-      {!props.authenticated &&
-        <div>
+      <div className='navbar'>
+        {!props.authenticated && <Switch><LoginFormContainer /></Switch>}
+        {props.authenticated && <Switch><NavBar /></Switch>}
+      </div>
+      <div>
+        {!props.authenticated &&
+          <div>
+            <Switch>
+              <Route path="/sign-up" exact component={SignUpFormContainer} />
+            </Switch>
+          </div>
+        }
+        {props.authenticated &&
           <Switch>
-            <Route path="/" exact component={LoginFormContainer}/>
-            <Route path="/sign-up" exact component={SignUpFormContainer} />
+            <Route path="/create-event" exact component={CreateEventFormContainer} />
           </Switch>
-        </div>
-      }
-      <Route path='/' exact component={EventListContainer} />
-      <Route path='/event/:id' exact component={TicketListContainer} />
-      <Route path='/event/:id/ticket/:ticketId' exact component={TicketDetailsContainer} />
+        }
+        {!props.authenticated &&
+          <Switch>
+            <Route path='/' exact component={EventListContainer} />
+            <Route path='/event/:id' exact component={TicketListContainer} />
+            <Route path='/event/:id/ticket/:ticketId' exact component={TicketDetailsContainer} />
+          </Switch>
+        }
+      </div>
     </div>
   )
 }
 
-const mapStateToProps = state => ({
-  authenticated: !!state.users.token
-})
+const mapStateToProps = state => {
+  return {
+    authenticated: !!state.users.token
+  }
+
+}
 
 export default withRouter(connect(mapStateToProps)(Routes))

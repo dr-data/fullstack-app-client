@@ -1,6 +1,16 @@
 import * as request from 'superagent'
 import { baseUrl } from "../constants"
 
+export const ERROR = 'ERROR'
+
+const errorAction = (message) => {
+ 
+  return {
+    type: ERROR,
+    payload: { message }
+  }
+}
+
 export const GET_EVENTS = 'GET_EVENTS'
 
 function getAllEvents(payload) {
@@ -41,7 +51,7 @@ export function getEvent(id) {
             dispatch(getSelectedEvent(event))
         }
         catch (error) {
-            console.error(error)
+           return dispatch(errorAction(error.response.text))
         }
 
     }
@@ -65,7 +75,7 @@ export function getTickets(id) {
             dispatch(getAllTickets(tickets))
         }
         catch (error) {
-            console.error(error)
+            return dispatch(errorAction(error.response.text))
         }
 
     }
@@ -73,13 +83,10 @@ export function getTickets(id) {
 
 export const GET_SELECTED_TICKET = 'GET_SELECTED_TICKET'
 
-function getSelectedTicket(ticket, comments) {
+function getSelectedTicket(payload) {
     return {
         type: GET_SELECTED_TICKET,
-        payload : {
-            ticket,
-            comments
-        }
+        payload 
     }
 }
 
@@ -88,13 +95,10 @@ export function getTicket(id, ticketId) {
     return async function (dispatch) {
         try {
             const response = await request(url)
-            const { ticket } = response.body
-            const commentsResponse = await request(`${baseUrl}/tickets/${encodeURIComponent(ticketId)}/comments`)
-            const {comments} = commentsResponse.body
-            dispatch(getSelectedTicket(ticket, comments))
+            dispatch(getSelectedTicket(response.body))
         }
         catch (error) {
-            console.error(error)
+            return dispatch(errorAction(error.response.text))
         }
 
     }
@@ -102,19 +106,34 @@ export function getTicket(id, ticketId) {
 
 export const EVENT_CREATE_SUCCESS = 'EVENT_CREATE_SUCCESS'
 
-const eventCreateSuccess = event => ({
+const eventCreateSuccess = event =>{
+    console.log(event)
+    return{
   type: EVENT_CREATE_SUCCESS,
-  event
-})
+  payload : event
+}}
 
-export const createEvent = (data) => dispatch => {
+export const createEvent = (event) => (dispatch, getState) => {
+    const jwt = getState().users.token
+    const data = {
+        title: event.title,
+        description: event.description,
+        picture: event.picture,
+        startDate: event.startDate,
+        endDate: event.endDate,
+        active: true,
+        userId : getState().users.userId
+    }
   request
     .post(`${baseUrl}/events`)
+    .set('Authorization', `Bearer ${jwt}`)
     .send(data)
     .then(response => {
       dispatch(eventCreateSuccess(response.body))
     })
-    .catch(console.error)
+    .catch(error => {
+        console.log(error)
+      })
 }
 
 export const EVENT_UPDATED = 'EVENT_UPDATED'
@@ -131,4 +150,7 @@ export const updateEvent = (id, data) => dispatch => {
     .then(response => {
       dispatch(eventUpdated(response.body, data))
     })
+    .catch(error => {
+        dispatch(errorAction(error.response.text))
+      })
 }

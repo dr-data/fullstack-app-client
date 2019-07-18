@@ -36,7 +36,6 @@ class LoginFormContainer extends Component {
 }
 
 function mapStateToProps (state) {
-    console.log(state)
     return {
         message: state.users.message,
         username: state.users.username  

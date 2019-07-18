@@ -5,7 +5,7 @@ export const ERROR = 'ERROR'
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
 export const SIGNUP_SUCCESS = 'SIGNUP_SUCCESS'
 
-const errorAction = (message) => {
+ const errorAction = (message) => {
   return {
     type: ERROR,
     payload: { message }
