@@ -1,0 +1,4 @@
+.TicketList ul li{background: #fff; border-top: 1px solid}
+.TicketList ul li.red{border-color: red}
+.TicketList ul li.green{border-color: green}
+.TicketList ul li.green{border-color: yellow}

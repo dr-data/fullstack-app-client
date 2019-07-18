@@ -12,6 +12,11 @@ class TicketListContainer extends Component {
         this.props.getEvent(id)
         this.props.getTickets(id)
     }
+    colorAction(risk){
+        if (risk > 70) return 'red'
+        else if (risk > 40) return 'yellow'
+        else return 'green'
+    }
     render() {
         return (
 
@@ -29,7 +34,7 @@ class TicketListContainer extends Component {
                 }
                 {this.props.tickets &&
                     <div>
-                        <TicketList tickets={this.props.tickets} />
+                        <TicketList tickets={this.props.tickets} colorAction={this.colorAction}/>
                     </div>
                 }
 
