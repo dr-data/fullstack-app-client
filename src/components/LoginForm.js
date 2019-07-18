@@ -3,7 +3,6 @@ import React from 'react'
 export default function LoginForm (props){
         return (
             <div >
-            Already have an account?
                 <form onSubmit={props.onSubmit} className='forms login'>
                     <input 
                         type='text' 
@@ -11,6 +10,7 @@ export default function LoginForm (props){
                         placeholder='Enter your username'
                         onChange={props.onChange}
                         value={props.values.username}
+                        className='input'
                     />
                     <input
                         type='password' 
@@ -18,6 +18,7 @@ export default function LoginForm (props){
                         placeholder='Enter your password'
                         onChange={props.onChange}
                         value={props.values.password}
+                        className='input'
                     />
                     <button className='button'>Login</button>
                 </form>

@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import LoginForm from './LoginForm'
 import { Link } from 'react-router-dom'
 import { login } from '../actions/auth'
+import Logo from './Logo';
 class LoginFormContainer extends Component {
     state = { username: '', password: ''}
 
@@ -20,8 +21,7 @@ class LoginFormContainer extends Component {
     render() {
         return (
             <div className='container'>
-                {this.props.message &&
-                <p className='message'>{this.props.message}</p>}
+               <Logo />
                 <LoginForm
                     onSubmit={this.onSubmit}
                     onChange={this.onChange}
@@ -37,7 +37,7 @@ class LoginFormContainer extends Component {
 
 function mapStateToProps (state) {
     return {
-        message: state.users.message,
+        messageLogin: state.users.message,
         username: state.users.username  
     }
 }

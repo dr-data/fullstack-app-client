@@ -6,11 +6,11 @@ export default function TicketForm(props) {
         <div>
             <form id='selectModels' onSubmit={props.onSubmit} onChange={props.onChange}>
                 <label>picture
-                <input type='text' name='picture' value={props.values.picture} onChange={props.onChange} required /></label>
+                <input type='text' name='picture' value={props.values.picture} onChange={props.onChange} className='input' required /></label>
                 <label>price
-                <input type='number' name='price' value={props.values.price} onChange={props.onChange} required /></label>
+                <input type='number' name='price' value={props.values.price} onChange={props.onChange} className='input' required /></label>
                 <label>description
-                <input type='text' name='description' value={props.values.description} onChange={props.onChange} required /></label>
+                <input type='text' name='description' value={props.values.description} onChange={props.onChange} className='input' required /></label>
                 <button type='submit'>Add</button>
             </form>
         </div>

@@ -1,4 +1,30 @@
-.TicketList ul li{background: #fff; border-top: 1px solid}
-.TicketList ul li.red{border-color: red}
-.TicketList ul li.green{border-color: green}
-.TicketList ul li.green{border-color: yellow}
+.TicketList ul li {
+    background: #fff;
+    border-left: 4px solid;
+    padding: 20px;
+    border-radius: 4px;
+    margin-top: 10px;
+}
+
+.TicketList ul li a{
+    background: #fff;
+    padding: 20px;
+    text-decoration: none
+}
+
+.TicketList ul li a span{
+  display: inline-block;
+  padding: 0 10px
+}
+
+.TicketList ul li.red {
+    border-color: #e74c3c
+}
+
+.TicketList ul li.green {
+    border-color: #27ae60
+}
+
+.TicketList ul li.green {
+    border-color: #f39c12
+}

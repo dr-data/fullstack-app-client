@@ -1,9 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { createComment } from '../actions/events'
-import EventItem from './EventItem';
-import Loader from './Loader'
-import { Link } from 'react-router-dom'
 import Comment from './Comment'
 import CommentForm from './CommentForm';
 class CommentFormContainer extends React.Component {

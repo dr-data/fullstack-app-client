@@ -12,6 +12,8 @@ export default function SignUpForm(props) {
                         placeholder='Enter your username'
                         onChange={props.onChange}
                         value={props.values.username}
+                        className='input'
+                        required
                         
                     />
                     <input
@@ -20,6 +22,8 @@ export default function SignUpForm(props) {
                         placeholder='Enter your password'
                         onChange={props.onChange}
                         value={props.values.password}
+                        className='input'
+                        required
                     />
                     <input
                         type='password'
@@ -27,6 +31,8 @@ export default function SignUpForm(props) {
                         placeholder='Confirm you password'
                         onChange={props.onChange}
                         value={props.values.password_confirmation}
+                        className='input'
+                        required
                     />
                     <button className='button'>Sign Up</button>
                 </form>

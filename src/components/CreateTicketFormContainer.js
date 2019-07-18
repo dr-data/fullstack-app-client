@@ -4,7 +4,7 @@ import { createTicket, getEvent } from '../actions/events'
 import EventItem from './EventItem';
 import TicketForm from './TicketForm';
 import Loader from './Loader'
-import { Link } from 'react-router-dom'
+
 class CreateTicketFormContainer extends React.Component {
   id = this.props.match.params.id
   state = {
@@ -46,8 +46,6 @@ class CreateTicketFormContainer extends React.Component {
         }
         {this.props.newTicket &&
           <h1>Congratulations you successfully created the ticket</h1>
-          
-
         }
         <TicketForm
           onSubmit={this.onSubmit}

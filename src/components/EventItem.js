@@ -7,7 +7,8 @@ export default function EventItem(props) {
 
     return (
         <div className='eventItem'>
-            <img src={event.picture} alt={event.title} />
+            <div className='eventImg'><img src={event.picture} alt={event.title} /></div>
+            <div className='eventDetail'>
             <p className='itemTitle'>{event.title}</p>
             <p className='eventDescription'>{event.description}</p>
             <p className='eventDate'>
@@ -15,6 +16,9 @@ export default function EventItem(props) {
                 {event.startDate !== event.endDate && 
                     'Event starts:' + Moment(event.endDate).format('d MMM')}
             </p>
+            
+            </div>
+            <div className='clear'></div>
         </div>
     )
 }

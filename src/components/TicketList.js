@@ -8,7 +8,7 @@ export default function TicketList (props) {
             <ul>
             {props.tickets.map(ticket =>
                 <li key={ticket.ticket.id} className={props.colorAction(ticket.risk)}>
-                    <Link to={`/event/${ticket.ticket.eventId}/ticket/${ticket.ticket.id}`}>{ticket.ticket.price} EUR {ticket.ticket.description}</Link>
+                    <Link to={`/event/${ticket.ticket.eventId}/ticket/${ticket.ticket.id}`}><span>{ticket.ticket.price} EUR</span> <span>{ticket.ticket.description}</span></Link>
                 </li>
                 )}
             </ul>
