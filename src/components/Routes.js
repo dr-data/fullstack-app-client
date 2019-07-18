@@ -8,6 +8,7 @@ import TicketDetailsContainer from './TicketDetailsContainer';
 import LoginFormContainer from './LoginFormContainer';
 import SignUpFormContainer from './SignUpFormContainer';
 import CreateEventFormContainer from './CreateEventFormContainer';
+import CreateTicketFormContainer from './CreateTicketFormContainer';
 import NavBar from './NavBar';
 
 function Routes(props) {
@@ -28,15 +29,16 @@ function Routes(props) {
         {props.authenticated &&
           <Switch>
             <Route path="/create-event" exact component={CreateEventFormContainer} />
+            <Route path='/event/:id/create-ticket' exact component={CreateTicketFormContainer} />
           </Switch>
         }
-        {!props.authenticated &&
+        
           <Switch>
             <Route path='/' exact component={EventListContainer} />
             <Route path='/event/:id' exact component={TicketListContainer} />
             <Route path='/event/:id/ticket/:ticketId' exact component={TicketDetailsContainer} />
           </Switch>
-        }
+        
       </div>
     </div>
   )
