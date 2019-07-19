@@ -2,10 +2,10 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { updateTicket } from '../actions/events'
 
-import TicketForm from './TicketForm';
+import TicketUpdateForm from './TicketForm';
 class TicketUpdateFormContainer extends React.Component {
   id = this.props.match.params.id
-  ticketId = this.props.match.params.id
+  ticketId = this.props.match.params.ticketId
   state = {
     picture: '',
     price: '',
@@ -34,9 +34,9 @@ class TicketUpdateFormContainer extends React.Component {
       <div className='container'>
         
         {this.props.newTicket &&
-          <h1>The ticket is updated</h1>
+          <h4>The ticket is updated</h4>
         }
-        <TicketForm
+        <TicketUpdateForm
           onSubmit={this.onSubmit}
           onChange={this.onChange}
           values={this.state} />
@@ -47,7 +47,7 @@ class TicketUpdateFormContainer extends React.Component {
 }
 function mapStateToProps(state) {
   return {
-    newTicket: state.events.ticket
+    newTicket: state.events.newTicket
   }
 }
 

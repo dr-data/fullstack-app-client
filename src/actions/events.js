@@ -172,11 +172,11 @@ export const createTicket = (ticket) => (dispatch, getState) => {
 
 export const TICKET_UPDATE_SUCCESS = 'TICKET_UPDATE_SUCCESS'
 
-const ticketUpdateSuccess = ticket => {
+const ticketUpdateSuccess = newTicket => {
 
     return {
         type: TICKET_UPDATE_SUCCESS,
-        payload: ticket
+        payload: newTicket
     }
 }
 
