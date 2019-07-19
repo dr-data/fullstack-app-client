@@ -36,12 +36,11 @@ class CommentFormContainer extends React.Component {
 
   render() {
     return (
-      <div className='container'>
-        
+      <div className='commentFormContainer'>
         {this.props.newComment &&
             <Comment comment={this.props.newComment} key={this.props.newComment.id}/>
         }
-        {this.props.username}
+        <h4>{this.props.username}</h4>
         <CommentForm
           onSubmit={this.onSubmit}
           onChange={this.onChange}

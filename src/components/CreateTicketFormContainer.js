@@ -45,7 +45,7 @@ class CreateTicketFormContainer extends React.Component {
           </div>
         }
         {this.props.newTicket &&
-          <h1>Congratulations you successfully created the ticket</h1>
+          <p>Congratulations you successfully created the ticket</p>
         }
         <TicketForm
           onSubmit={this.onSubmit}
