@@ -149,6 +149,10 @@ body {
 max-width: 100%;
 }
 
+.button.next{
+  float: right;
+}
+.button.prev {float: left;}
 
 @media screen and (min-width: 670px) {
   .eventItem .eventImg{
