@@ -75,7 +75,7 @@ export function getTickets(id) {
             dispatch(getAllTickets(tickets))
         }
         catch (error) {
-            return dispatch(errorAction(error.response.text))
+            console.log(error)
         }
 
     }

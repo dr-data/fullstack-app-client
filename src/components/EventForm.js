@@ -2,8 +2,8 @@ import React from 'react'
 
 export default function EventForm (props) {
   return (
-    <div>
-         <form id='selectModels' onSubmit={props.onSubmit} onChange={props.onChange}>
+    <div className='createEventContainer'>
+         <form id='createEvent' onSubmit={props.onSubmit} onChange={props.onChange}>
                 <label>Title
                 <input type='text' name='title' value={props.values.title} onChange={props.onChange} className='input' required/></label>
                 <label>description
@@ -14,7 +14,7 @@ export default function EventForm (props) {
                 <input type='date' name='startDate' value={props.values.startDate} onChange={props.onChange} className='input' required /></label>
                 <label>event ends
                 <input type='date' name='endDate' value={props.values.endDate} onChange={props.onChange} className='input' required /></label>
-            <button type='submit'>Add</button>
+            <button type='submit' className='button'>Add</button>
           </form> 
     </div>
   )
